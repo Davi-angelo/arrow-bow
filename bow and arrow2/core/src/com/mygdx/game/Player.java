@@ -17,8 +17,8 @@ public class Player {
         this.tex = tex;
         this.x = posX;
         this.y = posY;
-        this.height = 100;
-        this.width = 50;
+        this.height = 110;
+        this.width = 72;
     }
 
     public void movimento(float mov){
@@ -49,7 +49,7 @@ public class Player {
 
                 if (!flecha.alive) {
                     flecha.alive = true;
-                    flecha.pos.set(this.x, this.y);
+                    flecha.pos.set(this.x , this.y + height/2 + 10);
                     break;
                 }
             }
@@ -64,8 +64,8 @@ public class Player {
     }
 
     public void draw(SpriteBatch batch, FlechaController flechaController){
-        update(flechaController);
         batch.draw(this.tex, this.x, this.y, this.width, this.height);
+        update(flechaController);
     }
 
 

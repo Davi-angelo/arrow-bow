@@ -23,14 +23,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		flechaTexture = new Texture("flecha.png");
 		balaoTexture = new Texture("balao.png");
-		playerTexture = new Texture("balao.png");
+		playerTexture = new Texture("player.png");
 
 		flechaController = new FlechaController(3, flechaTexture);
 		balaoController = new BalaoController(5, balaoTexture);
 
 		player = new Player(0, 0, playerTexture);
-
-
 	}
 
 	@Override

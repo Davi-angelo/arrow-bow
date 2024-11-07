@@ -16,8 +16,8 @@ public class Flecha {
         this.pos = pos;
         this.tex = tex;
 
-        this.height = 30;
-        this.width = 90;
+        this.height = 15;
+        this.width = 45;
 
         this.velocity = 3.5f;
 
