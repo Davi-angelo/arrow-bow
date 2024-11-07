@@ -15,7 +15,6 @@ public class BalaoController {
         for (int i = 0; i <= numberBalaos; i++) {
             balaos.add(new Balao(i*100 + 100, 50*i, balaoTexture));
         }
-
         this.size = numberBalaos;
     }
 
@@ -23,13 +22,11 @@ public class BalaoController {
 
     }
 
-
     public void update(){
         for (int i = 0 ; i <= this.size ; i++){
             Balao balao = balaos.get(i);
 
             balao.up();
-
         }
     }
 

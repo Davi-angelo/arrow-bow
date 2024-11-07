@@ -21,7 +21,6 @@ public class Balao {
         this.width = 40;
     }
 
-
     public void init(float posX, float posY){
         alive = true;
     }
@@ -41,6 +40,4 @@ public class Balao {
     public void draw(SpriteBatch batch){
         batch.draw(this.tex, this.x, this.y, this.width, this.height);
     }
-
-
 }

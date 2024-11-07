@@ -24,7 +24,6 @@ public class FlechaController {
             if(flecha.alive){
                 flecha.move();
             }
-
         }
     }
 

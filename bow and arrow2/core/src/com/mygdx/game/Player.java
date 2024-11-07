@@ -26,8 +26,6 @@ public class Player {
     }
 
     public void update(FlechaController flechaController){
-
-
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             movimento(4);
         }
@@ -41,7 +39,6 @@ public class Player {
             this.y = 0;
         }
 
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
 
             for (int i = 0; i < flechaController.size; i++) {
@@ -53,20 +50,11 @@ public class Player {
                     break;
                 }
             }
-
-
-
-
-
         }
-
-
     }
 
     public void draw(SpriteBatch batch, FlechaController flechaController){
         batch.draw(this.tex, this.x, this.y, this.width, this.height);
         update(flechaController);
     }
-
-
 }
