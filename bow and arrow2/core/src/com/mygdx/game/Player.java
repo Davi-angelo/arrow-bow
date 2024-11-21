@@ -10,51 +10,65 @@ public class Player {
     public float x, y;
     public int height, width;
     public Texture tex;
+    public float mov = 0;
+    public float speed;
     public int numFlechas;
+    public int maxFlechas;
     public int pontos;
+    public FlechaController flechaController;
 
-    public Player(float posX, float posY, Texture tex){
+    private int delayToShoot = 0;
+
+    Flecha flecha;
+
+    public Player(float posX, float posY, Texture tex, Texture flechaTex){
         this.tex = tex;
         this.x = posX;
         this.y = posY;
         this.height = 110;
         this.width = 72;
+        this.speed = 5;
+        this.numFlechas = 0;
+        this.maxFlechas = 12;
+        this.pontos = 0;
+
+        this.flechaController = new FlechaController(flechaTex);
     }
 
-    public void movimento(float mov){
+    public void movimento(){
         this.y += mov;
-    }
-
-    public void update(FlechaController flechaController){
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            movimento(4);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) { movimento(-4); }
 
         if(this.y >= Gdx.graphics.getHeight() - this.height){
             this.y = Gdx.graphics.getHeight() - this.height;
         }
-
         if(this.y <= 0) {
             this.y = 0;
         }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-
-            for (int i = 0; i < flechaController.size; i++) {
-                Flecha flecha = flechaController.flechas.get(i);
-
-                if (!flecha.alive) {
-                    flecha.alive = true;
-                    flecha.pos.set(this.x , this.y + height/2 + 10);
-                    break;
-                }
-            }
-        }
     }
 
-    public void draw(SpriteBatch batch, FlechaController flechaController){
+    public void update(){
+        this.movimento();
+
+        if(delayToShoot > 0){ delayToShoot--; }
+
+    }
+
+    public void shootArrow(){
+        if(numFlechas <= maxFlechas && delayToShoot == 0){
+            flechaController.shoot(this.x, this.y + height/2 + 10);
+            numFlechas++;
+
+            delayToShoot = 50;
+        }
+
+    }
+
+    public void draw(SpriteBatch batch){
         batch.draw(this.tex, this.x, this.y, this.width, this.height);
-        update(flechaController);
+
+        update();
+
+        this.flechaController.update();
+        this.flechaController.render(batch);
     }
 }

@@ -4,16 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Pool;
 
-public class Flecha {
+public class Flecha implements Pool.Poolable {
     public boolean alive;
     public Vector2 pos;
     public Texture tex;
     public int height, width;
     public float velocity;
 
-    public Flecha(Vector2 pos, Texture tex){
-        this.pos = pos;
+    public Flecha(Texture tex){
+        this.pos = new Vector2();
         this.tex = tex;
 
         this.height = 15;
@@ -24,10 +25,21 @@ public class Flecha {
         this.alive = false;
     }
 
+    public void init(float posX, float posY){
+        pos.set(posX, posY);
+        alive = true;
+    }
+
+    @Override
+    public void reset() {
+        pos.set(0, 0);
+        alive = false;
+    }
+
     public void move(){
         this.pos.x += this.velocity;
+
         if(this.pos.x > Gdx.graphics.getWidth()){
-            this.pos.x = 0;
             this.alive = false;
         }
     }

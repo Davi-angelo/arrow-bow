@@ -17,6 +17,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	FlechaController flechaController;
 
 	Player player;
+
+	InputHandler inputHandler;
 	
 	@Override
 	public void create () {
@@ -25,10 +27,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		balaoTexture = new Texture("balao.png");
 		playerTexture = new Texture("player.png");
 
-		flechaController = new FlechaController(5, flechaTexture);
 		balaoController = new BalaoController(5, balaoTexture);
 
-		player = new Player(0, 0, playerTexture);
+		player = new Player(0, 0, playerTexture, flechaTexture);
+
+		inputHandler = new InputHandler(player);
+		Gdx.input.setInputProcessor(inputHandler);
 	}
 
 	@Override
@@ -37,10 +41,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		batch.begin();
 
-		player.draw(batch, flechaController);
-
-		flechaController.update();
-		flechaController.render(batch);
+		player.draw(batch);
 
 		balaoController.update();
 		balaoController.render(batch);
