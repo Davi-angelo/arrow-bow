@@ -1,8 +1,7 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 
 import java.util.ArrayList;
@@ -12,18 +11,14 @@ public class FlechaController {
 
     private final Pool<Flecha> flechaPool;
 
-    public Texture tex;
 
-
-    public FlechaController(Texture tex){
-        this.tex = tex;
-
+    public FlechaController(AssetManager manager){      
         flechasAtivas  = new ArrayList<Flecha>();
 
         flechaPool = new Pool<Flecha>() {
             @Override
             protected Flecha newObject() {
-                return new Flecha(tex);
+                return new Flecha(manager);
             }
         };
 

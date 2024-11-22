@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,16 +14,16 @@ public class Flecha implements Pool.Poolable {
     public int height, width;
     public float velocity;
 
-    public Flecha(Texture tex){
+    public Flecha(AssetManager manager){
         this.pos = new Vector2();
-        this.tex = tex;
-
         this.height = 15;
         this.width = 45;
-
         this.velocity = 3.5f;
-
         this.alive = false;
+
+        if (manager.isLoaded("flecha.png")) {
+            this.tex = manager.get("flecha.png", Texture.class);
+        }
     }
 
     public void init(float posX, float posY){

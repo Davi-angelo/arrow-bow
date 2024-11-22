@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -11,9 +10,9 @@ public class BalaoController {
     public int size;
 
 
-    public BalaoController(int numberBalaos, Texture balaoTexture) {
+    public BalaoController(int numberBalaos, AssetManager manager) {
         for (int i = 0; i <= numberBalaos; i++) {
-            balaos.add(new Balao(i*100 + 100, 50*i, balaoTexture));
+            balaos.add(new Balao(i*100 + 100, 50*i, manager));
         }
         this.size = numberBalaos;
     }

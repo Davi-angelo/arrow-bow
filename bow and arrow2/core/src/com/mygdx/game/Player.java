@@ -1,10 +1,9 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 
 public class Player {
     public float x, y;
@@ -21,8 +20,7 @@ public class Player {
 
     Flecha flecha;
 
-    public Player(float posX, float posY, Texture tex, Texture flechaTex){
-        this.tex = tex;
+    public Player(float posX, float posY, AssetManager manager){
         this.x = posX;
         this.y = posY;
         this.height = 110;
@@ -32,7 +30,11 @@ public class Player {
         this.maxFlechas = 12;
         this.pontos = 0;
 
-        this.flechaController = new FlechaController(flechaTex);
+        if (manager.isLoaded("player.png")) {
+            this.tex = manager.get("player.png", Texture.class);
+        }
+
+        this.flechaController = new FlechaController(manager);
     }
 
     public void movimento(){

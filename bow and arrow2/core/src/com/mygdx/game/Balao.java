@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -11,14 +12,17 @@ public class Balao {
     public int height, width;
     public float velocity;
 
-    public Balao(int posX, int posY, Texture tex) {
+    public Balao(int posX, int posY, AssetManager manager) {
         this.alive = false;
         this.x = posX;
         this.y = posY;
-        this.tex = tex;
         this.velocity = 1.5f;
         this.height = 60;
         this.width = 40;
+
+        if (manager.isLoaded("balao.png")) {
+            this.tex = manager.get("balao.png", Texture.class);
+        }
     }
 
     public void init(float posX, float posY){
