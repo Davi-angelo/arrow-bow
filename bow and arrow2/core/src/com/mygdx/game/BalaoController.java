@@ -22,6 +22,17 @@ public class BalaoController {
 
     }
 
+    public int baloesAlives(){
+        int count = 0;
+        for (Balao balao : balaos) {
+            if (balao.alive) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public void verificaColisaoFlecha(Vector2 posicaoFlecha){
         for (int i = 0 ; i <= this.size ; i++){
             Balao balao = balaos.get(i);
