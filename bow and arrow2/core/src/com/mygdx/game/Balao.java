@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class Balao {
     public boolean alive;
@@ -13,7 +14,7 @@ public class Balao {
     public float velocity;
 
     public Balao(int posX, int posY, AssetManager manager) {
-        this.alive = false;
+        this.alive = true;
         this.x = posX;
         this.y = posY;
         this.velocity = 1.5f;
@@ -27,6 +28,18 @@ public class Balao {
 
     public void init(float posX, float posY){
         alive = true;
+    }
+
+    public boolean verificaColisao(Vector2 posicao){
+        if (posicao.x > this.x && posicao.x < this.x + width &&
+            posicao.y > this.y + height/2 && posicao.y < this.y + height) {
+            
+            this.alive = false;
+            return true;
+        }
+        
+
+        return false;
     }
 
     public void up(){

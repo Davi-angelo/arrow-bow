@@ -26,7 +26,7 @@ public class InputHandler extends InputAdapter {
         }
 
 
-        System.out.println("keyDown: " + keycode);
+        //System.out.println("keyDown: " + keycode);
         return false;
     }
 

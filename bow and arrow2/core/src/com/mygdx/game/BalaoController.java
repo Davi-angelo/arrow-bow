@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
@@ -21,18 +22,31 @@ public class BalaoController {
 
     }
 
+    public void verificaColisaoFlecha(Vector2 posicaoFlecha){
+        for (int i = 0 ; i <= this.size ; i++){
+            Balao balao = balaos.get(i);
+
+            if(balao.alive && balao.verificaColisao(posicaoFlecha)) { System.out.println("Bateu"); };
+        }
+    }
+
     public void update(){
         for (int i = 0 ; i <= this.size ; i++){
             Balao balao = balaos.get(i);
 
-            balao.up();
+            if (balao.alive) {
+                balao.up();
+            }
         }
     }
 
     public void render(SpriteBatch batch){
         for (int i = 0; i <= this.size; i++) {
             Balao balao = balaos.get(i);
-            balao.draw(batch);
+
+            if (balao.alive) {
+                balao.draw(batch);
+            }
         }
     }
 }

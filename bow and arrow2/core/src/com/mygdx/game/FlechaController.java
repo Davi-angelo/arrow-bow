@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 
 import java.util.ArrayList;
@@ -21,6 +22,23 @@ public class FlechaController {
                 return new Flecha(manager);
             }
         };
+
+    }
+
+    public ArrayList<Vector2> getHitboxFlechas(){
+        ArrayList<Vector2> array = new ArrayList<Vector2>();
+        final int len = flechasAtivas.size();
+        Flecha flecha;
+
+        for(int i = 0; i < len; i++) {
+            flecha = flechasAtivas.get(i);
+
+            if (flecha.alive) {
+                array.add(flecha.getHitboxFlecha());
+            }
+        }
+
+        return array;
 
     }
 
