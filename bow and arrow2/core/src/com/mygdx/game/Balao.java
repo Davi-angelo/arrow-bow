@@ -11,15 +11,17 @@ public class Balao {
     public Texture tex;
     public float x, y;
     public int height, width;
+    public float worldHeight;
     public float velocity;
 
-    public Balao(int posX, int posY, AssetManager manager) {
+    public Balao(int posX, int posY, float height, AssetManager manager) {
         this.alive = true;
         this.x = posX;
         this.y = posY;
         this.velocity = 1.5f;
         this.height = 60;
         this.width = 40;
+        this.worldHeight = height;
 
         if (manager.isLoaded("balao.png")) {
             this.tex = manager.get("balao.png", Texture.class);
@@ -45,7 +47,7 @@ public class Balao {
     public void up(){
 
         this.y += this.velocity;
-        if(this.y > Gdx.graphics.getHeight()){
+        if(this.y > worldHeight){
             this.y = -this.height;
         }
     }

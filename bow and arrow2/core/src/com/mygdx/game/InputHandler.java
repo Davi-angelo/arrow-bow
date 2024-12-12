@@ -25,7 +25,6 @@ public class InputHandler extends InputAdapter {
             player.shootArrow();
         }
 
-
         //System.out.println("keyDown: " + keycode);
         return false;
     }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -20,6 +21,8 @@ public class MyGdxGame extends Game {
 
 	AssetManager manager = new AssetManager();
 
+	BitmapFont font;
+
 	BalaoController balaoController;
 
 	Player player;
@@ -29,14 +32,21 @@ public class MyGdxGame extends Game {
 	TelaPrincipal telaPrincipal;
 
 	public FitViewport viewport;
-	public Camera camera;
+	public OrthographicCamera camera;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getHeight();
+		int tam = 30;		
+		camera = new OrthographicCamera(tam, tam * (h / w));
 
-		camera = new OrthographicCamera();
-		viewport = new FitViewport(800, 600, camera);
+		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+		camera.update();
+
+		viewport = new FitViewport(w, h, camera);
+
+		batch = new SpriteBatch();
 
 		manager.load("flecha.png", Texture.class);
 		manager.load("balao.png", Texture.class);
@@ -44,14 +54,18 @@ public class MyGdxGame extends Game {
 
 		manager.finishLoading();
 
-		balaoController = new BalaoController(5, manager);
+		float worldHeight = viewport.getWorldHeight();
 
-		player = new Player(0, 0, manager);
+		balaoController = new BalaoController(5, worldHeight, manager);
+
+		player = new Player(0, 0, worldHeight, manager);
 
 		inputHandler = new InputHandler(player);
 		Gdx.input.setInputProcessor(inputHandler);
 
-		batch.setProjectionMatrix(camera.combined);
+
+		font = new BitmapFont();
+
 
 		setScreen(new TelaPrincipal(this));
 	}

@@ -11,9 +11,9 @@ public class BalaoController {
     public int size;
 
 
-    public BalaoController(int numberBalaos, AssetManager manager) {
+    public BalaoController(int numberBalaos, float height, AssetManager manager) {
         for (int i = 0; i <= numberBalaos; i++) {
-            balaos.add(new Balao(i*100 + 100, 50*i, manager));
+            balaos.add(new Balao(i*100 + 100, 50*i, height, manager));
         }
         this.size = numberBalaos;
     }
