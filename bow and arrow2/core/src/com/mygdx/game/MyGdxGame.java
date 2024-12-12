@@ -21,13 +21,13 @@ public class MyGdxGame extends Game {
 
 	AssetManager manager = new AssetManager();
 
-	BitmapFont font;
+	// BitmapFont font;
 
-	BalaoController balaoController;
+	// BalaoController balaoController;
 
-	Player player;
+	// Player player;
 
-	InputHandler inputHandler;
+	// InputHandler inputHandler;
 
 	TelaPrincipal telaPrincipal;
 
@@ -54,20 +54,22 @@ public class MyGdxGame extends Game {
 
 		manager.finishLoading();
 
-		float worldHeight = viewport.getWorldHeight();
+		// float worldHeight = viewport.getWorldHeight();
 
-		balaoController = new BalaoController(5, worldHeight, manager);
+		// balaoController = new BalaoController(5, worldHeight, manager);
 
-		player = new Player(0, 0, worldHeight, manager);
+		// player = new Player(0, 0, worldHeight, manager);
 
-		inputHandler = new InputHandler(player);
-		Gdx.input.setInputProcessor(inputHandler);
-
-
-		font = new BitmapFont();
+		// inputHandler = new InputHandler(player);
+		// Gdx.input.setInputProcessor(inputHandler);
 
 
-		setScreen(new TelaPrincipal(this));
+		// font = new BitmapFont();
+
+
+		//setScreen(new TelaPrincipal(this));
+
+		setScreen(new Menu(this));
 	}
 
 	@Override
@@ -81,14 +83,5 @@ public class MyGdxGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		manager.clear();
-	}
-
-	public void verificaColisao(){
-		ArrayList<Vector2> array = player.flechaController.getHitboxFlechas();
-		final int len = array.size();
-
-        for (Vector2 posicoes : array) {
-            balaoController.verificaColisaoFlecha(posicoes);
-        }
 	}
 }

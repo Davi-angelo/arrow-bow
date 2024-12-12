@@ -33,12 +33,17 @@ public class BalaoController {
         return count;
     }
 
-    public void verificaColisaoFlecha(Vector2 posicaoFlecha){
+    public int verificaColisaoFlecha(Vector2 posicaoFlecha){
+        int count = 0;
         for (int i = 0 ; i <= this.size ; i++){
             Balao balao = balaos.get(i);
 
-            if(balao.alive && balao.verificaColisao(posicaoFlecha)) { System.out.println("Bateu"); };
+            if(balao.alive && balao.verificaColisao(posicaoFlecha)) { 
+                count++;
+                System.out.println("Bateu"); 
+            };
         }
+        return count;
     }
 
     public void update(){

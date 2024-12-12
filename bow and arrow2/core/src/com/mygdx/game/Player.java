@@ -28,8 +28,8 @@ public class Player {
         this.width = 72;
         this.worldHeight = height;
         this.speed = 5;
-        this.numFlechas = 0;
         this.maxFlechas = 12;
+        this.numFlechas = this.maxFlechas;
         this.pontos = 0;
 
         if (manager.isLoaded("player.png")) {
@@ -58,9 +58,9 @@ public class Player {
     }
 
     public void shootArrow(){
-        if(numFlechas <= maxFlechas && delayToShoot == 0){
+        if(numFlechas > 0 && delayToShoot == 0){
             flechaController.shoot(this.x, this.y + height/2 + 10);
-            numFlechas++;
+            numFlechas--;
 
             delayToShoot = 50;
         }

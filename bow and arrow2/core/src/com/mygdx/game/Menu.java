@@ -9,32 +9,22 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TelaPrincipal implements Screen {
-
+public class Menu implements Screen{
     final MyGdxGame game;
     private ShapeRenderer shape;
     private BitmapFont font;
-	private BalaoController balaoController;
-	private Player player;
-	private InputHandler inputHandler;
+	private InputHandlerMenu inputHandler;
 
-    public TelaPrincipal(final MyGdxGame game) {
+    public Menu(final MyGdxGame game) {
         this.game = game;
-
-        float worldHeight = game.viewport.getWorldHeight();
 
         this.shape = new ShapeRenderer(); 
         this.font = new BitmapFont();
         this.font.getData().setScale(1);
 
-        this.balaoController = new BalaoController(5, worldHeight, game.manager);
-
-		this.player = new Player(0, 0, worldHeight, game.manager);
-
-		this.inputHandler = new InputHandler(this.player, game);
+		this.inputHandler = new InputHandlerMenu(this);
 		Gdx.input.setInputProcessor(this.inputHandler);
     }
 
@@ -49,14 +39,7 @@ public class TelaPrincipal implements Screen {
 
         game.batch.setProjectionMatrix(game.camera.combined);
 
-        verificaColisao();
-
         game.batch.begin(); //Batch principal
-
-        player.draw(game.batch);
-
-        balaoController.update();
-        balaoController.render(game.batch);
 
         game.batch.end(); //Bach acaba
 
@@ -65,13 +48,15 @@ public class TelaPrincipal implements Screen {
         shape.setColor(Color.SKY);
         //shape.rect(player.x, player.y, player.width, player.height);
 
+        shape.rect(150, 220, 350, 75);
+
         shape.rect(0, 450, 750, 35);
         shape.end();
 
-        game.batch.begin();
-        font.setColor(0, 0, 0, 1f);
-        font.draw(game.batch, "Pontos: " + player.pontos + "        Flechas restantes: " + player.numFlechas, 25, 470);
-        game.batch.end();
+        // game.batch.begin();
+        // font.setColor(0, 0, 0, 1f);
+        // font.draw(game.batch, "Pontos: " + player.pontos + "        Flechas restantes: " + player.numFlechas, 25, 470);
+        // game.batch.end();
     }
 
     @Override
@@ -98,14 +83,4 @@ public class TelaPrincipal implements Screen {
     public void dispose() {
 
     }
-
-    public void verificaColisao(){
-		ArrayList<Vector2> array = player.flechaController.getHitboxFlechas();
-		int baloesEstourados = 0;
-
-        for (Vector2 posicoes : array) {
-            baloesEstourados += balaoController.verificaColisaoFlecha(posicoes);
-        }
-		player.pontos += baloesEstourados;
-	}
 }
