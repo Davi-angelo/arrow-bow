@@ -13,13 +13,13 @@ public class FlechaController {
     private final Pool<Flecha> flechaPool;
 
 
-    public FlechaController(AssetManager manager){      
+    public FlechaController(float width, AssetManager manager){
         flechasAtivas  = new ArrayList<Flecha>();
 
         flechaPool = new Pool<Flecha>() {
             @Override
             protected Flecha newObject() {
-                return new Flecha(manager);
+                return new Flecha(width, manager);
             }
         };
 
@@ -46,6 +46,15 @@ public class FlechaController {
         Flecha flecha = flechaPool.obtain();  //Usa uma flecha da pool quando o controller manda
         flecha.init(x, y);
         flechasAtivas.add(flecha);
+    }
+
+    public boolean existeFlechaAlive(){
+        for(Flecha flecha : flechasAtivas){
+            if(flecha.alive){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void update(){

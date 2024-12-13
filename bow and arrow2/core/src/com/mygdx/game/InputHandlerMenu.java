@@ -27,5 +27,21 @@ public class InputHandlerMenu extends InputAdapter {
 
         return false;
     }
+
+    public boolean touchUp (int x, int y, int pointer, int button) {
+
+        if(button == Input.Buttons.LEFT) {// 150-500 x 220-295
+            if(x >= 150 && x <= 500){
+                int yMundo = (int)menu.game.viewport.getWorldHeight() - y;
+                if(yMundo >= 220 && yMundo <= 295){
+                    menu.game.setScreen(new TelaPrincipal(menu.game));
+                }
+            }
+        }
+
+        System.out.println(x + "    " + (menu.game.viewport.getWorldHeight() - y));
+
+        return false;
+    }
     
 }

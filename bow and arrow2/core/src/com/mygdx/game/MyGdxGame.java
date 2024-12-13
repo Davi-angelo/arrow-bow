@@ -21,14 +21,6 @@ public class MyGdxGame extends Game {
 
 	AssetManager manager = new AssetManager();
 
-	// BitmapFont font;
-
-	// BalaoController balaoController;
-
-	// Player player;
-
-	// InputHandler inputHandler;
-
 	TelaPrincipal telaPrincipal;
 
 	public FitViewport viewport;
@@ -53,21 +45,6 @@ public class MyGdxGame extends Game {
 		manager.load("player.png", Texture.class);
 
 		manager.finishLoading();
-
-		// float worldHeight = viewport.getWorldHeight();
-
-		// balaoController = new BalaoController(5, worldHeight, manager);
-
-		// player = new Player(0, 0, worldHeight, manager);
-
-		// inputHandler = new InputHandler(player);
-		// Gdx.input.setInputProcessor(inputHandler);
-
-
-		// font = new BitmapFont();
-
-
-		//setScreen(new TelaPrincipal(this));
 
 		setScreen(new Menu(this));
 	}

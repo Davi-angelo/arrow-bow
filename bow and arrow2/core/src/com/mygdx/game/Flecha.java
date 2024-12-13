@@ -14,15 +14,17 @@ public class Flecha implements Pool.Poolable {
     public Vector2 pos;
     public Texture tex;
     public int height, width;
+    public float worldWidth;
     public float velocity;
 
     public Pixmap pixmap;
     public Texture bitmap;
 
-    public Flecha(AssetManager manager){
+    public Flecha(float width, AssetManager manager){
         this.pos = new Vector2();
         this.height = 15;
         this.width = 45;
+        this.worldWidth = width;
         this.velocity = 3.5f;
         this.alive = false;
 
@@ -49,7 +51,7 @@ public class Flecha implements Pool.Poolable {
     public void move(){
         this.pos.x += this.velocity;
 
-        if(this.pos.x > Gdx.graphics.getWidth()){
+        if(this.pos.x > worldWidth){
             this.alive = false;
         }
     }

@@ -25,14 +25,15 @@ public class TelaPrincipal implements Screen {
         this.game = game;
 
         float worldHeight = game.viewport.getWorldHeight();
+        float worldWidth = game.viewport.getWorldWidth();
 
-        this.shape = new ShapeRenderer(); 
+        this.shape = new ShapeRenderer();
         this.font = new BitmapFont();
         this.font.getData().setScale(1);
 
         this.balaoController = new BalaoController(5, worldHeight, game.manager);
 
-		this.player = new Player(0, 0, worldHeight, game.manager);
+		this.player = new Player(0, 0, worldHeight, worldWidth, game.manager);
 
 		this.inputHandler = new InputHandler(this.player, game);
 		Gdx.input.setInputProcessor(this.inputHandler);
@@ -72,6 +73,10 @@ public class TelaPrincipal implements Screen {
         font.setColor(0, 0, 0, 1f);
         font.draw(game.batch, "Pontos: " + player.pontos + "        Flechas restantes: " + player.numFlechas, 25, 470);
         game.batch.end();
+
+        if(verificaGameOver()){
+            game.setScreen(new TelaPrincipal(game));
+        }
     }
 
     @Override
@@ -108,4 +113,14 @@ public class TelaPrincipal implements Screen {
         }
 		player.pontos += baloesEstourados;
 	}
+
+    public boolean verificaGameOver(){
+        if(player.numFlechas == 0){
+            if(!player.flechaController.existeFlechaAlive()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

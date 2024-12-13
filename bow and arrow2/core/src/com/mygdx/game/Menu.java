@@ -21,7 +21,7 @@ public class Menu implements Screen{
         this.game = game;
 
         this.shape = new ShapeRenderer(); 
-        this.font = new BitmapFont();
+        this.font = new BitmapFont(Gdx.files.internal("data/arial.fnt"), Gdx.files.internal("data/arial.png"), false);
         this.font.getData().setScale(1);
 
 		this.inputHandler = new InputHandlerMenu(this);
@@ -48,15 +48,15 @@ public class Menu implements Screen{
         shape.setColor(Color.SKY);
         //shape.rect(player.x, player.y, player.width, player.height);
 
-        shape.rect(150, 220, 350, 75);
+        shape.rect(150, 220, 350, 75); // 150-500 x 220-295
 
         shape.rect(0, 450, 750, 35);
         shape.end();
 
-        // game.batch.begin();
-        // font.setColor(0, 0, 0, 1f);
-        // font.draw(game.batch, "Pontos: " + player.pontos + "        Flechas restantes: " + player.numFlechas, 25, 470);
-        // game.batch.end();
+        game.batch.begin();
+        font.setColor(0, 0, 0, 1f);
+        font.draw(game.batch, "JOGAR", (game.viewport.getWorldWidth()/2) - 50, 265);
+        game.batch.end();
     }
 
     @Override

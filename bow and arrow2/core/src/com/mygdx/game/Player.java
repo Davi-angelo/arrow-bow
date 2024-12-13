@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Player {
     public float x, y;
     public int height, width;
-    public float worldHeight;
+    public float worldHeight, worldWidth;
     public Texture tex;
     public float mov = 0;
     public float speed;
@@ -21,12 +21,13 @@ public class Player {
 
     Flecha flecha;
 
-    public Player(float posX, float posY, float height, AssetManager manager){
+    public Player(float posX, float posY, float height, float width, AssetManager manager){
         this.x = posX;
         this.y = posY;
         this.height = 110;
         this.width = 72;
         this.worldHeight = height;
+        this.worldWidth = width;
         this.speed = 5;
         this.maxFlechas = 12;
         this.numFlechas = this.maxFlechas;
@@ -36,7 +37,7 @@ public class Player {
             this.tex = manager.get("player.png", Texture.class);
         }
 
-        this.flechaController = new FlechaController(manager);
+        this.flechaController = new FlechaController(this.worldWidth, manager);
     }
 
     public void movimento(){
